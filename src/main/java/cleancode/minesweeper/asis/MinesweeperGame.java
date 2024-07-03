@@ -34,17 +34,7 @@ public class MinesweeperGame {
             int selectedRowIndex = convertRowFrom(cellInputRow);
             if (userActionInput.equals("2")) {
                 board[selectedRowIndex][selectedColIndex] = "⚑";
-                boolean isAllOpened = true;
-                for (int row = 0; row < 8; row++) {
-                    for (int col = 0; col < 10; col++) {
-                        if (board[row][col].equals("□")) {
-                            isAllOpened = false;
-                        }
-                    }
-                }
-                if (isAllOpened) {
-                    gameStatus = 1;
-                }
+                checkIfGameIsOver();
             } else if (userActionInput.equals("1")) {
                 if (landMines[selectedRowIndex][selectedColIndex]) {
                     board[selectedRowIndex][selectedColIndex] = "☼";
@@ -53,21 +43,30 @@ public class MinesweeperGame {
                 } else {
                     open(selectedRowIndex, selectedColIndex);
                 }
-                boolean isAllOpened = true;
-                for (int i = 0; i < 8; i++) {
-                    for (int j = 0; j < 10; j++) {
-                        if (board[i][j].equals("□")) {
-                            isAllOpened = false;
-                        }
-                    }
-                }
-                if (isAllOpened) {
-                    gameStatus = 1;
-                }
+                checkIfGameIsOver();
             } else {
                 System.out.println("잘못된 번호를 선택하셨습니다.");
             }
         }
+    }
+
+    private static void checkIfGameIsOver() {
+        boolean isAllOpened = isAllCellOpened();
+        if (isAllOpened) {
+            gameStatus = 1;
+        }
+    }
+
+    private static boolean isAllCellOpened() {
+        boolean isAllOpened = true;
+        for (int row = 0; row < 8; row++) {
+            for (int col = 0; col < 10; col++) {
+                if (board[row][col].equals("□")) {
+                    isAllOpened = false;
+                }
+            }
+        }
+        return isAllOpened;
     }
 
     private static int convertRowFrom(char cellInputRow) {
@@ -75,43 +74,30 @@ public class MinesweeperGame {
     }
 
     private static int convertColFrom(char cellInputCol) {
-        int selectedColIndex;
         switch (cellInputCol) {
             case 'a':
-                selectedColIndex = 0;
-                break;
+                return 0;
             case 'b':
-                selectedColIndex = 1;
-                break;
+                return 1;
             case 'c':
-                selectedColIndex = 2;
-                break;
+                return 2;
             case 'd':
-                selectedColIndex = 3;
-                break;
+                return 3;
             case 'e':
-                selectedColIndex = 4;
-                break;
+                return 4;
             case 'f':
-                selectedColIndex = 5;
-                break;
+                return 5;
             case 'g':
-                selectedColIndex = 6;
-                break;
+                return 6;
             case 'h':
-                selectedColIndex = 7;
-                break;
+                return 7;
             case 'i':
-                selectedColIndex = 8;
-                break;
+                return 8;
             case 'j':
-                selectedColIndex = 9;
-                break;
+                return 9;
             default:
-                selectedColIndex = -1;
-                break;
+                return -1;
         }
-        return selectedColIndex;
     }
 
     private static void showBoard() {
