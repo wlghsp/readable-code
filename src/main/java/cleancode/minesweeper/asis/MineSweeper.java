@@ -3,13 +3,10 @@ package cleancode.minesweeper.asis;
 import cleancode.minesweeper.asis.io.ConsoleInputHandler;
 import cleancode.minesweeper.asis.io.ConsoleOutputHandler;
 
-import java.util.Arrays;
-
 public class MineSweeper {
 
     public static final int BOARD_ROW_SIZE = 8;
     public static final int BOARD_COL_SIZE = 10;
-    private static Cell[][] BOARD = new Cell[BOARD_ROW_SIZE][BOARD_COL_SIZE];
 
     private final GameBoard gameBoard = new GameBoard(BOARD_ROW_SIZE, BOARD_COL_SIZE);
     private final ConsoleInputHandler consoleInputHandler = new ConsoleInputHandler();
@@ -52,19 +49,19 @@ public class MineSweeper {
         int selectedRowIndex = getSelectedRowIndex(cellInput);
 
         if (doesUserChooseToPlantFlag(userActionInput)) {
-            BOARD[selectedRowIndex][selectedColIndex].flag();
+            gameBoard.flag(selectedRowIndex, selectedColIndex);
             checkIfGameIsOver();
             return;
         }
 
         if (doesUserChooseToOpenCell(userActionInput)) {
-            if (isLandMineCell(selectedRowIndex, selectedColIndex)) {
-                BOARD[selectedRowIndex][selectedColIndex].open();
+            if (gameBoard.isLandMineCell(selectedRowIndex, selectedColIndex)) {
+                gameBoard.open(selectedRowIndex, selectedColIndex);
                 changeGameStatusToLose();
                 return;
             }
 
-            open(selectedRowIndex, selectedColIndex);
+            gameBoard.openSurroundedCells(selectedRowIndex, selectedColIndex);
             checkIfGameIsOver();
             return;
         }
@@ -73,10 +70,6 @@ public class MineSweeper {
 
     private void changeGameStatusToLose() {
         gameStatus = -1;
-    }
-
-    private boolean isLandMineCell(int selectedRowIndex, int selectedColIndex) {
-        return BOARD[selectedRowIndex][selectedColIndex].isLandMine();
     }
 
     private boolean doesUserChooseToOpenCell(String userActionInput) {
@@ -116,8 +109,7 @@ public class MineSweeper {
     }
 
     private void checkIfGameIsOver() {
-        boolean isAllChecked = isAllChecked();
-        if (isAllChecked) {
+        if (gameBoard.isAllChecked()) {
             changeGameStatusToWin();
         }
     }
@@ -126,11 +118,6 @@ public class MineSweeper {
         gameStatus = 1;
     }
 
-    private boolean isAllChecked() {
-        return Arrays.stream(BOARD)
-                .flatMap(Arrays::stream)
-                .allMatch(Cell::isChecked);
-    }
 
     private int convertRowFrom(char cellInputRow) {
         int rowIndex = Character.getNumericValue(cellInputRow) - 1;
@@ -169,34 +156,4 @@ public class MineSweeper {
     }
 
 
-
-
-
-
-    private void open(int row, int col) {
-        if (row < 0 || row >= BOARD_ROW_SIZE || col < 0 || col >= BOARD_COL_SIZE) {
-            return;
-        }
-        if (BOARD[row][col].isOpened()) {
-            return;
-        }
-        if (isLandMineCell(row, col)) {
-            return;
-        }
-
-        BOARD[row][col].open();
-
-        if (BOARD[row][col].hasLandMineCount()) {
-            return;
-        }
-
-        open(row - 1, col - 1);
-        open(row - 1, col);
-        open(row - 1, col + 1);
-        open(row, col - 1);
-        open(row, col + 1);
-        open(row + 1, col - 1);
-        open(row + 1, col);
-        open(row + 1, col + 1);
-    }
 }
