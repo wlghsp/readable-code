@@ -1,10 +1,12 @@
 package cleancode.minesweeper.asis;
 
+import cleancode.minesweeper.asis.game.GameInitializable;
+import cleancode.minesweeper.asis.game.GameRunnable;
 import cleancode.minesweeper.asis.gamelevel.GameLevel;
 import cleancode.minesweeper.asis.io.ConsoleInputHandler;
 import cleancode.minesweeper.asis.io.ConsoleOutputHandler;
 
-public class MineSweeper {
+public class MineSweeper implements GameInitializable, GameRunnable {
 
     private final GameBoard gameBoard;
     private final BoardIndexConverter boardIndexConverter = new BoardIndexConverter();
@@ -17,9 +19,14 @@ public class MineSweeper {
         gameBoard = new GameBoard(gameLevel);
     }
 
+    @Override
+    public void initialize() {
+        gameBoard.initializeGame();
+    }
+
+    @Override
     public void run() {
         consoleOutputHandler.showGameStartComments();
-        gameBoard.initializeGame();
 
         while (true) {
             try {

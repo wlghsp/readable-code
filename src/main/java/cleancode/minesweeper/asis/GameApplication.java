@@ -6,11 +6,10 @@ import cleancode.minesweeper.asis.gamelevel.VeryBeginner;
 
 public class GameApplication {
 
-
-
     public static void main(String[] args) {
         GameLevel gameLevel = new Beginner();
         MineSweeper mineSweeper = new MineSweeper(gameLevel);
+        mineSweeper.initialize();
         mineSweeper.run();
     }
 
