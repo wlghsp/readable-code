@@ -1,12 +1,12 @@
 package cleancode.minesweeper.asis.cell;
 
-public class LandMineCell extends Cell {
+public class EmptyCell extends Cell {
 
-    public static final String LAND_MINE_SIGN = "☼";
+    private static final String EMPTY_SIGN = "■";
 
     @Override
     public boolean isLandMine() {
-        return true;
+        return false;
     }
 
     @Override
@@ -17,7 +17,7 @@ public class LandMineCell extends Cell {
     @Override
     public String getSign() {
         if (isOpened) {
-            return LAND_MINE_SIGN;
+            return EMPTY_SIGN;
         }
         if (isFlagged) {
             return FLAG_SIGN;

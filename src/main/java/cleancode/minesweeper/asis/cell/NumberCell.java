@@ -1,23 +1,27 @@
 package cleancode.minesweeper.asis.cell;
 
-public class LandMineCell extends Cell {
+public class NumberCell extends Cell {
 
-    public static final String LAND_MINE_SIGN = "☼";
+    private int nearbyLandMineCount;
+
+    public NumberCell(int nearbyLandMineCount) {
+        this.nearbyLandMineCount = nearbyLandMineCount;
+    }
 
     @Override
     public boolean isLandMine() {
-        return true;
+        return false;
     }
 
     @Override
     public boolean hasLandMineCount() {
-        return false;
+        return true;
     }
 
     @Override
     public String getSign() {
         if (isOpened) {
-            return LAND_MINE_SIGN;
+            return String.valueOf(nearbyLandMineCount);
         }
         if (isFlagged) {
             return FLAG_SIGN;
