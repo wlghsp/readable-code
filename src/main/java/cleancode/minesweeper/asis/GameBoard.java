@@ -1,9 +1,6 @@
 package cleancode.minesweeper.asis;
 
-import cleancode.minesweeper.asis.cell.Cell;
-import cleancode.minesweeper.asis.cell.EmptyCell;
-import cleancode.minesweeper.asis.cell.LandMineCell;
-import cleancode.minesweeper.asis.cell.NumberCell;
+import cleancode.minesweeper.asis.cell.*;
 import cleancode.minesweeper.asis.gamelevel.GameLevel;
 
 import java.util.Arrays;
