@@ -1,21 +1,20 @@
 package cleancode.minesweeper.asis;
 
+import cleancode.minesweeper.asis.config.GameConfig;
 import cleancode.minesweeper.asis.gamelevel.Beginner;
-import cleancode.minesweeper.asis.gamelevel.GameLevel;
-import cleancode.minesweeper.asis.gamelevel.VeryBeginner;
 import cleancode.minesweeper.asis.io.ConsoleInputHandler;
 import cleancode.minesweeper.asis.io.ConsoleOutputHandler;
-import cleancode.minesweeper.asis.io.InputHandler;
-import cleancode.minesweeper.asis.io.OutputHandler;
 
 public class GameApplication {
 
     public static void main(String[] args) {
-        GameLevel gameLevel = new Beginner();
-        InputHandler inputHandler = new ConsoleInputHandler();
-        OutputHandler outputHandler = new ConsoleOutputHandler();
+        GameConfig gameConfig = new GameConfig(
+                new Beginner(),
+                new ConsoleInputHandler(),
+                new ConsoleOutputHandler()
+        );
 
-        MineSweeper mineSweeper = new MineSweeper(gameLevel, inputHandler, outputHandler);
+        MineSweeper mineSweeper = new MineSweeper(gameConfig);
         mineSweeper.initialize();
         mineSweeper.run();
     }

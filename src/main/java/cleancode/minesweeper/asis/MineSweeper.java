@@ -1,5 +1,6 @@
 package cleancode.minesweeper.asis;
 
+import cleancode.minesweeper.asis.config.GameConfig;
 import cleancode.minesweeper.asis.game.GameInitializable;
 import cleancode.minesweeper.asis.game.GameRunnable;
 import cleancode.minesweeper.asis.gamelevel.GameLevel;
@@ -17,10 +18,10 @@ public class MineSweeper implements GameInitializable, GameRunnable {
 
     private int gameStatus = 0; // 0: 게임 중, 1: 승리, -1: 패배
 
-    public MineSweeper(GameLevel gameLevel, InputHandler inputHandler, OutputHandler outputHandler) {
-        gameBoard = new GameBoard(gameLevel);
-        this.inputHandler = inputHandler;
-        this.outputHandler = outputHandler;
+    public MineSweeper(GameConfig gameConfig) {
+        gameBoard = new GameBoard(gameConfig.getGameLevel());
+        this.inputHandler = gameConfig.getInputHandler();
+        this.outputHandler = gameConfig.getOutputHandler();
     }
 
     @Override
