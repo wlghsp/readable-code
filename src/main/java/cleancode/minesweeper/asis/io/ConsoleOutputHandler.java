@@ -2,7 +2,7 @@ package cleancode.minesweeper.asis.io;
 
 import cleancode.minesweeper.asis.GameBoard;
 import cleancode.minesweeper.asis.cell.CellSnapshot;
-import cleancode.minesweeper.asis.cell.CellSnapshotStatus;
+import cleancode.minesweeper.asis.io.sign.*;
 import cleancode.minesweeper.asis.position.CellPosition;
 
 import java.util.List;
@@ -10,11 +10,7 @@ import java.util.stream.IntStream;
 
 public class ConsoleOutputHandler implements OutputHandler {
 
-    private static final String EMPTY_SIGN = "■";
-    public static final String LAND_MINE_SIGN = "☼";
-    private static final String FLAG_SIGN = "⚑";
-    private static final String UNCHECKED_SIGN = "□";
-
+    private final CellSignFinder cellSignFinder = new CellSignFinder();
 
     @Override
     public void showGameStartComments() {
@@ -34,33 +30,14 @@ public class ConsoleOutputHandler implements OutputHandler {
                 CellPosition cellPosition = CellPosition.of(row, col);
 
                 CellSnapshot snapshot = board.getSnapshot(cellPosition);
-                String cellSign = decideCellSignFrom(snapshot);
+//                String cellSign = cellSignFinder.findCellSignFrom(snapshot);
+                String cellSign = CellSignProvider.findCellSignFrom(snapshot);
 
-                System.out.println(cellSign + " ");
+                System.out.print(cellSign + " ");
             }
             System.out.println();
         }
         System.out.println();
-    }
-
-    private String decideCellSignFrom(CellSnapshot snapshot) {
-        CellSnapshotStatus status = snapshot.getStatus();
-        if (status == CellSnapshotStatus.EMPTY) {
-            return EMPTY_SIGN;
-        }
-        if (status == CellSnapshotStatus.FLAG) {
-            return FLAG_SIGN;
-        }
-        if (status == CellSnapshotStatus.LAND_MINE) {
-            return LAND_MINE_SIGN;
-        }
-        if (status == CellSnapshotStatus.NUMBER) {
-            return String.valueOf(snapshot.getNearbyLandMineCount());
-        }
-        if (status == CellSnapshotStatus.UNCHECKED) {
-            return UNCHECKED_SIGN;
-        }
-        throw new IllegalArgumentException("확인할 수 없는 셀입니다.");
     }
 
     private String generateColAlphabets(GameBoard board) {
