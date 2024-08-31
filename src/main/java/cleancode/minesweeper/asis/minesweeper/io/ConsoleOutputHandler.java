@@ -68,10 +68,12 @@ public class ConsoleOutputHandler implements OutputHandler {
     public void showCommentForUserAction() {
         System.out.println("선택한 셀에 대한 행위를 선택하세요. (1: 오픈, 2: 깃발 꽂기)");
     }
+
     @Override
     public void showExceptionMessage(Exception e) {
         System.out.println(e.getMessage());
     }
+
     @Override
     public void showSimpleMessage(String message) {
         System.out.println(message);

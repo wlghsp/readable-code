@@ -2,9 +2,8 @@ package cleancode.minesweeper.asis.minesweeper.board.cell;
 
 public class NumberCell implements Cell {
 
-    private int nearbyLandMineCount;
-
     private final CellState cellState = CellState.initialize();
+    private int nearbyLandMineCount;
 
     public NumberCell(int nearbyLandMineCount) {
         this.nearbyLandMineCount = nearbyLandMineCount;
