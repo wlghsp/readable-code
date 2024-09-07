@@ -7,7 +7,7 @@ public class CellSnapshot {
     private final CellSnapshotStatus status;
     private final int nearbyLandMineCount;
 
-    public CellSnapshot(CellSnapshotStatus status, int nearbyLandMineCount) {
+    private CellSnapshot(CellSnapshotStatus status, int nearbyLandMineCount) {
         this.status = status;
         this.nearbyLandMineCount = nearbyLandMineCount;
     }

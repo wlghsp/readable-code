@@ -11,7 +11,7 @@ public class CellPositions {
     private final List<CellPosition> positions;
 
 
-    public CellPositions(List<CellPosition> positions) {
+    private CellPositions(List<CellPosition> positions) {
         this.positions = positions;
     }
 

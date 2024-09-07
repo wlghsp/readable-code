@@ -19,7 +19,7 @@ public class RelativePosition {
     private final int deltaRow;
     private final int deltaCol;
 
-    public RelativePosition(int deltaRow, int deltaCol) {
+    private RelativePosition(int deltaRow, int deltaCol) {
         this.deltaRow = deltaRow;
         this.deltaCol = deltaCol;
     }

@@ -10,7 +10,7 @@ public class StudyCafePassOrder {
     private final StudyCafeSeatPass seatPass;
     private final StudyCafeLockerPass lockerPass;
 
-    public StudyCafePassOrder(StudyCafeSeatPass seatPass, StudyCafeLockerPass lockerPass) {
+    private StudyCafePassOrder(StudyCafeSeatPass seatPass, StudyCafeLockerPass lockerPass) {
         this.seatPass = seatPass;
         this.lockerPass = lockerPass;
     }

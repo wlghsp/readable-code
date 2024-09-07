@@ -7,7 +7,7 @@ public class Cells {
 
     private final List<Cell> cells;
 
-    public Cells(List<Cell> cells) {
+    private Cells(List<Cell> cells) {
         this.cells = cells;
     }
 
